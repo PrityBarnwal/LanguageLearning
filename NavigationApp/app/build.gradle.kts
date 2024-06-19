@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.navigationapp"
+    namespace = "com.example.languageLearning"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.navigationapp"
+        applicationId = "com.example.languageLearning"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

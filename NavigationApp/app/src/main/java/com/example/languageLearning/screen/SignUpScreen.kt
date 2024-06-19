@@ -1,4 +1,4 @@
-package com.example.navigationapp.screen
+package com.example.languageLearning.screen
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,8 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.navigationapp.HomeRoute
-import com.example.navigationapp.LoginRoute
+import com.example.languageLearning.HomeRoute
+import com.example.languageLearning.LoginRoute
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -1,4 +1,4 @@
-package com.example.navigationapp.screen.home
+package com.example.languageLearning.screen.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

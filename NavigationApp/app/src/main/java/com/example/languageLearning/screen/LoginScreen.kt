@@ -1,4 +1,4 @@
-package com.example.navigationapp.screen
+package com.example.languageLearning.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,10 +32,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.navigationapp.HomeRoute
-import com.example.navigationapp.SignInRoute
+import com.example.languageLearning.HomeRoute
+import com.example.languageLearning.SignInRoute
 
 
+/*
 @Composable
 fun LoginScreen(navController: NavController) {
     val email = remember { mutableStateOf("") }
@@ -143,5 +144,114 @@ fun validatePassword(password: String): Boolean {
         Regex("(?=^.{8,}\$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*\$\"")
 
     return passwordPattern.matches(password)
+}
+*/
+
+@Composable
+fun LoginScreen(navController: NavController) {
+    val phoneNumber = remember { mutableStateOf("") }
+    var isValidPhoneNumber by remember { mutableStateOf(true) }
+
+    val otp = remember { mutableStateOf("") }
+    var isValidOtp by remember { mutableStateOf(true) }
+    var otpErrorMessage by remember { mutableStateOf("") }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        OutlinedTextField(
+            value = phoneNumber.value,
+            onValueChange = {
+                phoneNumber.value = it
+                isValidPhoneNumber = it.length == 10 && it.all { char -> char.isDigit() }
+            },
+            label = { Text("Phone Number") },
+            isError = !isValidPhoneNumber,
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+            keyboardActions = KeyboardActions(KeyboardActions.Default.onNext),
+            shape = MaterialTheme.shapes.medium,
+            singleLine = true
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        OutlinedTextField(
+            value = otp.value,
+            onValueChange = {
+                otp.value = it
+            },
+            label = { Text("OTP") },
+            isError = !isValidOtp,
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
+            keyboardActions = KeyboardActions(KeyboardActions.Default.onDone),
+            shape = MaterialTheme.shapes.medium,
+            singleLine = true
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(
+            text = buildAnnotatedString {
+                append("If already have an account ")
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = Color.Black)) {
+                    append("SignIn")
+                }
+            },
+            modifier = Modifier.clickable {
+                navController.navigate(SignInRoute)
+            }
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        Button(
+            onClick = {
+                isValidPhoneNumber =
+                    phoneNumber.value.length == 10 && phoneNumber.value.all { char -> char.isDigit() }
+                isValidOtp = validateOtp(otp.value)
+
+                if (isValidPhoneNumber && isValidOtp) {
+                    navController.navigate(
+                        HomeRoute(
+                            email = phoneNumber.value, password = otp.value
+                        )
+                    )
+                } else if (!isValidOtp) {
+                    otpErrorMessage =
+                        "Invalid OTP. Please enter the correct OTP sent to your phone number."
+                }
+            }, modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 50.dp, start = 50.dp, end = 50.dp)
+                .clip(RoundedCornerShape(20.dp))
+                .background(Color(0xFF4755A3))
+        ) {
+            Text(text = "Go to Home Screen", color = Color.White)
+        }
+
+        if (!isValidPhoneNumber && phoneNumber.value.isNotEmpty()) {
+            Text(
+                text = "Invalid phone number",
+                color = Color.Red,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(start = 16.dp)
+            )
+        }
+
+        if (!isValidOtp && otp.value.isNotEmpty()) {
+            Text(
+                text = otpErrorMessage,
+                color = Color.Red,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(start = 16.dp)
+            )
+        }
+    }
+}
+
+fun validateOtp(otp: String): Boolean {
+    return otp.length == 6 && otp.all { char -> char.isDigit() }
 }
 

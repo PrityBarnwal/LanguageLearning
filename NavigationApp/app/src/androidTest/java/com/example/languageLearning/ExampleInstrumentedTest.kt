@@ -1,4 +1,4 @@
-package com.example.navigationapp
+package com.example.languageLearning
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

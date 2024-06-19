@@ -1,4 +1,4 @@
-package com.example.navigationapp
+package com.example.languageLearning
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -30,12 +30,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.example.navigationapp.screen.LoginScreen
-import com.example.navigationapp.screen.SignUpScreen
-import com.example.navigationapp.screen.home.HomeScreen
-import com.example.navigationapp.screen.home.ProfileScreen
-import com.example.navigationapp.screen.home.SearchScreen
-import com.example.navigationapp.ui.theme.NavigationAppTheme
+import com.example.languageLearning.screen.LoginScreen
+import com.example.languageLearning.screen.SignUpScreen
+import com.example.languageLearning.screen.home.HomeScreen
+import com.example.languageLearning.screen.home.ProfileScreen
+import com.example.languageLearning.screen.home.SearchScreen
+import com.example.languageLearning.ui.theme.NavigationAppTheme
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {

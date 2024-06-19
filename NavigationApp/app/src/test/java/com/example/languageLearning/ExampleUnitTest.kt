@@ -1,4 +1,4 @@
-package com.example.navigationapp
+package com.example.languageLearning
 
 import org.junit.Test
 
